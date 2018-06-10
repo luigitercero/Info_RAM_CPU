@@ -2,15 +2,15 @@
 <div class="section">
     <h5>ram</h5>
     <div class="row">
-        <div class="col s12 m5">
-            <div class="card-panel teal">
-                <span class="white-text">I am a very simple card. I am good at containing small bits of information. I am convenient because I require
-                    little markup to use effectively. I am similar to what is called a panel in other frameworks.
-                </span>
+        <div class="col s12 m7">
+            <div class="card-panel">
+                <div id="piechart" style="width: 500px; height: 500px;"></div>
             </div>
         </div>
     </div>
 </div>
+
+
 <div class="divider"></div>
 <div class="section">
     <h5>CPU</h5>
@@ -28,11 +28,30 @@
 <div class="section">
     <h5>Proc</h5>
     <div class="row">
-        <div class="col s12 m5">
+        <div class="col s12 m10">
             <div class="card-panel teal">
-                <span class="white-text">I am a very simple card. I am good at containing small bits of information. I am convenient because I require
-                    little markup to use effectively. I am similar to what is called a panel in other frameworks.
-                </span>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s8 offset-s2">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Pid</th>
+                                            <th>nombre</th>
+                                            <th>Id Usuario</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="proc">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <pre id="objeto"></pre>
+                        <ul id="lista"></ul>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -42,8 +42,18 @@ app.get('/about', function (req, res) {
 
 app.post('/endpoint', function (req, res) {
     var obj = {};
-    console.log('body: ' + JSON.stringify(req.body));
-    res.send(req.body);
+    var fs = require('fs');
+    let rut = "/home/luigitercero/Documentos/cpu"
+    let archivo = fs.readFileSync(rut, 'utf-8');
+    res.send(JSON.parse(archivo));
+});
+
+app.post('/proc', function (req, res) {
+    var obj = {};
+    var fs = require('fs');
+    let rut = "/home/luigitercero/Documentos/proc"
+    let archivo = fs.readFileSync(rut, 'utf-8');
+    res.send(JSON.parse(archivo));
 });
 
 app.listen(8080, function () {

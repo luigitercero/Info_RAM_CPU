@@ -1,19 +1,101 @@
 <script type="text/javascript">
+    function drawChart(ram) {
+        let usado = ram.total - ram.libre;
+        let libre = ram.libre;
+        console.log(usado);
+        console.log(libre);
+
+
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Usado', usado],
+            ['Libre', libre]
+        ]);
+
+        var options = {
+            title: 'Memoria Ram total ' + ram.total + ' Byte'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+
+
+
+    $(document).ready(function () {
+        setInterval(function () {
+            getRamCPU();
+            getProc();
+        }, 2000);
+    });
+
+    function getProc() {
+        console.log('getProc');
+        var data = {};
+        data.title = "title";
+        data.message = "message";
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:8080/proc',
+            success: function (data) {
+                console.log('success');
+                //console.log(JSON.stringify(data));
+                let dat2 = JSON.stringify(data);
+                console.log(dat2);
+                imprimirPocesos(data)
+            },
+            error: function () { console.log('error al querer obtener proc'); }
+
+        });
+    }
+    function imprimirPocesos(data) {
+
+        $('#proc').empty()
+        let a = 0;
+        data.proceso.forEach(element => {
+            $('#proc').append("<tr>"
+                + "<th>" + element.PID + "</th>"
+                + "<th>" + element.nombre + "</th>"
+                + "<th>" + element.UsuarioId + "</th>"
+                + "<th>" + element.estado + "</th>"
+                + "</tr>");
+            a++;
+        });
+    }
+    function getRamCPU() {
+        console.log('get ram');
+        var data = {};
+        data.title = "title";
+        data.message = "message";
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:8080/endpoint',
+            success: function (data) {
+                console.log('success');
+                //console.log(JSON.stringify(data));
+                let dat2 = JSON.stringify(data);
+                console.log(dat2);
+
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(drawChart);
+                drawChart(data.ram);
+
+            },
+            error: function () { console.log('error en el archivo ram'); }
+
+        });
+
+    }
+
     $(function () {
         $('#select_link').click(function (e) {
             e.preventDefault();
             console.log('select_link clicked');
-
-            /*$.ajax({
-               dataType: 'jsonp',
-               data: "data=yeah",						
-               jsonp: 'callback',
-               url: 'http://localhost:3000/endpoint?callback=?',						
-               success: function(data) {
-                   console.log('success');
-                   console.log(JSON.stringify(data));
-               }
-           });*/
             var data = {};
             data.title = "title";
             data.message = "message";
@@ -31,13 +113,6 @@
 
 
             });
-            /*$.ajax('http://localhost:3000/endpoint', {
-                    type: 'POST',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    success: function() { console.log('success');},
-                    error  : function() { console.log('error');}
-            });*/
         });
     });
 </script>
