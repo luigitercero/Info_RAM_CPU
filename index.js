@@ -43,7 +43,7 @@ app.get('/about', function (req, res) {
 app.post('/endpoint', function (req, res) {
     var obj = {};
     var fs = require('fs');
-    let rut = "/home/luigitercero/Documentos/cpu/memorias_info";
+    let rut = "/proc/memorias_info";
     //let rut = "/home/luigitercero/Documentos/cpu"
     let archivo = fs.readFileSync(rut, 'utf-8');
     res.send(JSON.parse(archivo));
