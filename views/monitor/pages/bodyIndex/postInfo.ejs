@@ -19,8 +19,8 @@
     function drawCurveTypes() {
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'X');
-        data.addColumn('number', 'Dogs');
-        data.addColumn('number', 'Cats');
+        data.addColumn('number', 'cpu: ');
+        data.addColumn('number', 'cpu2: ');
         /*
          let a = "["
          for (let index = 0; index < 70; index++) {
@@ -63,7 +63,7 @@
         ]);
 
         var options = {
-            title: 'Memoria Ram total ' + ram.total + ' Byte'
+            title: 'total: ' + ram.total + ' Byte'
         };
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
@@ -73,7 +73,7 @@
         setInterval(function () {
             getRamCPU();
             getProc();
-        }, 2000);
+        }, 1000);
     });
 
     function getProc() {
@@ -112,6 +112,15 @@
             a++;
         });
     }
+    function imprimirCPUUso(cpu, dato) {
+        console.log(dato);
+        $('#' + cpu).empty()
+        let a = 0;
+        $('#' + cpu).append(cpu + ": " + dato);
+        a++;
+
+
+    }
     function getRamCPU() {
         console.log('get ram');
         var data = {};
@@ -128,16 +137,15 @@
                 //console.log(JSON.stringify(data));
                 let dat2 = JSON.stringify(data);
                 //console.log(dat2);
-
                 google.charts.load('current', { 'packages': ['corechart'] });
                 google.charts.setOnLoadCallback(drawChart(data.ram));
-
                 cpu_S.shift();
                 cpu_S.push([data.cpu1.porcentaje, data.cpu2.porcentaje]);
-
                 google.charts.load('current', { packages: ['corechart', 'line'] });
                 google.charts.setOnLoadCallback(drawCurveTypes);
 
+                imprimirCPUUso("cpu1", data.cpu1.uso);
+                imprimirCPUUso("cpu2", data.cpu2.uso);
 
             },
             error: function () { console.log('error en el archivo ram'); }
