@@ -19,20 +19,6 @@
         </nav>
         <div class="jumbotron">
             <h1>estoy en la vitual</h1>
-            <p>Welcome to templating using EJS</p>
-            <h2>Variable</h2>
-            <p>
-                <%= tagline %>
-            </p>
-            <h2>Loop</h2>
-            <ul>
-                <% drinks.forEach(function(drink) { %>
-                    <li>
-                        <%= drink.name %> -
-                            <%= drink.drunkness %>
-                    </li>
-                    <% }); %>
-            </ul>
             <% include bodyIndex/postInfo %>
                 <div id="select_div">
                     <a href="#" id="select_link">Test</a>
@@ -40,9 +26,6 @@
                 <% include bodyIndex/graph %>
 
         </div>
-
-
-
     </main>
     <footer>
         <% include ../partials/footer %>
