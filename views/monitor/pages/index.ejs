@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+    <header>
+        <% include ../partials/head %>
+    </header>
+    <main>
+        <script type="text/javascript" src="/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/vendor/materialize/js/materialize.js"></script>
+        <nav>
+        </nav>
+        <div class="jumbotron">
+            <h1>This is great</h1>
+            <p>Welcome to templating using EJS</p>
+            <h2>Variable</h2>
+            <p>
+                <%= tagline %>
+            </p>
+            <h2>Loop</h2>
+            <ul>
+                <% drinks.forEach(function(drink) { %>
+                    <li>
+                        <%= drink.name %> -
+                            <%= drink.drunkness %>
+                    </li>
+                    <% }); %>
+            </ul>
+            <% include bodyIndex/postInfo %>
+                <div id="select_div">
+                    <a href="#" id="select_link">Test</a>
+                </div>
+                <% include bodyIndex/graph %>
+
+        </div>
+
+    </main>
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+
+</html>

@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/luigitercero/Info_RAM_CPU#readme",
   "dependencies": {
+<<<<<<< HEAD
     "ejs": "^2.6.1",
     "express": "^4.16.3"
+=======
+    "express": "^3.21.2"
+>>>>>>> a5802683eab934bebdb6b526a1588dc79b020d7c
   }
 }
