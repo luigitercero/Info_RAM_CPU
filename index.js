@@ -63,7 +63,9 @@ app.post('/matar', function (req, res) {
     var obj = {};
 
     const exec = require('child_process').exec;
-    const child = exec('kill ' + req.message,
+    console.log(req.body.message);
+
+    const child = exec('kill ' + req.body.message,
         (error, stdout, stderr) => {
             console.log(`stdout: ${stdout}`);
             console.log(`stderr: ${stderr}`);

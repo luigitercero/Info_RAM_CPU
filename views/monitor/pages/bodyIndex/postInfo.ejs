@@ -159,7 +159,7 @@
                 + "<th>" + element.nombre + "</th>"
                 + "<th>" + element.UsuarioId + "</th>"
                 + "<th>" + element.estado + "</th>"
-                + "<th> " + "<a id=\"k" + element.PID + "\" onClick=\"matar(k" + element.PID + ")\"class=\"waves-effect waves-light btn\">kill</a>" + "</th>"
+                + "<th> " + "<a id=\"" + element.PID + "\" onClick=\"matar(" + element.PID + ")\"class=\"waves-effect waves-light btn\">kill</a>" + "</th>"
                 +
 
                 + "</tr>");
@@ -172,7 +172,7 @@
 
 
         var data = {};
-        data.title = "matar";
+        data.title = "title";
         data.message = id;
 
         $.ajax({
