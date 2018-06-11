@@ -190,9 +190,9 @@
                 google.charts.load('current', { 'packages': ['corechart'] });
                 google.charts.setOnLoadCallback(drawChart(data.ram));
                 ram_S.shift();
-                ram_S.push(data.ram.porcentaje);
+                ram_S.push([data.ram.porcentaje]);
                 cpu_S.shift();
-                cpu_S.push([data.cpu1.porcentaje, data.cpu2.porcentaje]);
+                cpu_S.push([[data.cpu1.porcentaje, data.cpu2.porcentaje]]);
 
                 google.charts.load('current', { packages: ['corechart', 'line'] });
                 google.charts.setOnLoadCallback(drawCurveTypes);
