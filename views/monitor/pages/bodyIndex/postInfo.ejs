@@ -102,8 +102,8 @@
     function drawChart(ram) {
         let usado = ram.total - ram.libre;
         let libre = ram.libre;
-        console.log(usado);
-        console.log(libre);
+        //console.log(usado);
+        //console.log(libre);
 
 
         var data = google.visualization.arrayToDataTable([
@@ -127,7 +127,7 @@
     });
 
     function getProc() {
-        console.log('getProc');
+        //console.log('getProc');
         var data = {};
         data.title = "title";
         data.message = "message";
@@ -138,10 +138,10 @@
             contentType: 'application/json',
             url: 'http://localhost:8080/proc',
             success: function (data) {
-                console.log('success');
+                //console.log('success');
                 //console.log(JSON.stringify(data));
                 let dat2 = JSON.stringify(data);
-                console.log(dat2);
+                //console.log(dat2);
                 imprimirPocesos(data)
             },
             error: function () { console.log('error al querer obtener proc'); }
@@ -153,17 +153,44 @@
         $('#proc').empty()
         let a = 0;
         data.proceso.forEach(element => {
+
             $('#proc').append("<tr>"
                 + "<th>" + element.PID + "</th>"
                 + "<th>" + element.nombre + "</th>"
                 + "<th>" + element.UsuarioId + "</th>"
                 + "<th>" + element.estado + "</th>"
+                + "<th> " + "<a id=\"k" + element.PID + "\" onClick=\"matar(k" + element.PID + ")\"class=\"waves-effect waves-light btn\">kill</a>" + "</th>"
+                +
+
                 + "</tr>");
             a++;
         });
     }
+    function matar(id) {
+        console.log(id);
+
+
+
+        var data = {};
+        data.title = "matar";
+        data.message = id;
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:8080/matar',
+            success: function (data) {
+                console.log('success');
+                //console.log(JSON.stringify(data));
+            },
+            error: function () { console.log('error'); }
+        });
+
+
+    }
     function imprimirCPUUso(cpu, dato) {
-        console.log(dato);
+        //console.log(dato);
         $('#' + cpu).empty()
         let a = 0;
         $('#' + cpu).append(cpu + ": " + dato);
@@ -172,7 +199,7 @@
 
     }
     function getRamCPU() {
-        console.log('get ram');
+        //console.log('get ram');
         var data = {};
         data.title = "title";
         data.message = "message";
@@ -183,16 +210,16 @@
             contentType: 'application/json',
             url: 'http://localhost:8080/endpoint',
             success: function (data) {
-                console.log('success');
+                // console.log('success');
                 //console.log(JSON.stringify(data));
                 let dat2 = JSON.stringify(data);
                 //console.log(dat2);
                 google.charts.load('current', { 'packages': ['corechart'] });
                 google.charts.setOnLoadCallback(drawChart(data.ram));
                 ram_S.shift();
-                ram_S.push([data.ram.porcentaje]);
+                ram_S.push(data.ram.porcentaje);
                 cpu_S.shift();
-                cpu_S.push([[data.cpu1.porcentaje, data.cpu2.porcentaje]]);
+                cpu_S.push([data.cpu1.porcentaje, data.cpu2.porcentaje]);
 
                 google.charts.load('current', { packages: ['corechart', 'line'] });
                 google.charts.setOnLoadCallback(drawCurveTypes);
@@ -211,7 +238,7 @@
     $(function () {
         $('#select_link').click(function (e) {
             e.preventDefault();
-            console.log('select_link clicked');
+            //console.log('select_link clicked');
             var data = {};
             data.title = "title";
             data.message = "message";
@@ -222,8 +249,8 @@
                 contentType: 'application/json',
                 url: 'http://localhost:8080/endpoint',
                 success: function (data) {
-                    console.log('success');
-                    console.log(JSON.stringify(data));
+                    //console.log('success');
+                    //console.log(JSON.stringify(data));
                 },
                 error: function () { console.log('error'); }
             });

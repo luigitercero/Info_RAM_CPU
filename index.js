@@ -43,8 +43,8 @@ app.get('/about', function (req, res) {
 app.post('/endpoint', function (req, res) {
     var obj = {};
     var fs = require('fs');
-    let rut = "/proc/memorias_info";
-    //let rut = "/home/luigitercero/Documentos/cpu"
+    //let rut = "/proc/memorias_info";
+    let rut = "/home/luigitercero/Documentos/cpu"
     let archivo = fs.readFileSync(rut, 'utf-8');
     res.send(JSON.parse(archivo));
 });
@@ -52,10 +52,27 @@ app.post('/endpoint', function (req, res) {
 app.post('/proc', function (req, res) {
     var obj = {};
     var fs = require('fs');
-    let rut = "/proc/info_procesos_201408606"
-    //let rut = "/home/luigitercero/Documentos/proc"
+    //let rut = "/proc/info_procesos_201408606"
+    let rut = "/home/luigitercero/Documentos/proc"
     let archivo = fs.readFileSync(rut, 'utf-8');
     res.send(JSON.parse(archivo));
+});
+
+app.post('/matar', function (req, res) {
+    var fs = require('fs');
+    var obj = {};
+
+    const exec = require('child_process').exec;
+    const child = exec('kill ' + req.message,
+        (error, stdout, stderr) => {
+            console.log(`stdout: ${stdout}`);
+            console.log(`stderr: ${stderr}`);
+            if (error !== null) {
+                console.log(`exec error: ${error}`);
+            }
+        });
+    res.send(req.body);
+
 });
 
 app.listen(8080, function () {
